@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ท่องเที่ยวกำแพงเพชร - เสน่ห์ศิลาแลงแห่งเมืองชากังราว</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Prompt -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Prompt', sans-serif;
+      background-color: #FAF8F5; /* โทนสีศิลาทรายอบอุ่น */
+    }
+    .page-view { display: none; }
+    .page-view.active { display: block; }
+    .hero-bg {
+      background: linear-gradient(180deg, rgba(28, 25, 23, 0.72) 0%, rgba(6, 78, 59, 0.88) 100%), 
+                  url('https://commons.wikimedia.org/wiki/Special:FilePath/Wat_ChangRop.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+</head>
+<body class="text-stone-800 antialiased min-h-screen flex flex-col justify-between">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-amber-900/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="#home" class="flex items-center space-x-3">
+        <!-- Logo Emblem โทนศิลาแลง -->
+        <span class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-700 to-stone-900 flex items-center justify-center text-amber-200 text-sm font-bold shadow border border-amber-500/30">
+          ชกร
+        </span>
+        <div>
+          <span class="text-base font-bold text-stone-900 block leading-tight">กำแพงเพชร</span>
+          <span class="text-[11px] text-amber-800 font-medium block leading-tight">เมืองมรดกโลกชากังราว</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center space-x-1 text-sm font-medium text-stone-600">
+        <a href="#home" class="nav-link px-3.5 py-1.5 rounded-lg transition" data-page="home">หน้าแรก</a>
+        <a href="#places" class="nav-link px-3.5 py-1.5 rounded-lg transition" data-page="places">แหล่งท่องเที่ยว</a>
+        <a href="#hotels" class="nav-link px-3.5 py-1.5 rounded-lg transition" data-page="hotels">ที่พักแนะนำ</a>
+        <a href="#food" class="nav-link px-3.5 py-1.5 rounded-lg transition" data-page="food">ของดีเมืองกำแพง</a>
+        <a href="#reviews" class="nav-link px-3.5 py-1.5 rounded-lg transition" data-page="reviews">รีวิวนักท่องเที่ยว</a>
+      </nav>
+
+      <div class="flex items-center space-x-2">
+        <a href="#reviews" onclick="setTimeout(()=>document.getElementById('reviewerName')?.focus(), 150)" class="bg-amber-700 hover:bg-amber-800 text-white text-xs sm:text-sm font-medium px-4 py-2 rounded-lg transition shadow-sm border border-amber-600/30">
+          ✍️ เขียนรีวิว
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="md:hidden border-t border-amber-900/10 flex justify-around py-2 bg-[#FAF8F5] text-xs text-stone-600">
+      <a href="#home" class="nav-link p-1.5 rounded" data-page="home">หน้าแรก</a>
+      <a href="#places" class="nav-link p-1.5 rounded" data-page="places">ที่เที่ยว</a>
+      <a href="#hotels" class="nav-link p-1.5 rounded" data-page="hotels">ที่พัก</a>
+      <a href="#food" class="nav-link p-1.5 rounded" data-page="food">ของฝาก</a>
+      <a href="#reviews" class="nav-link p-1.5 rounded" data-page="reviews">รีวิว</a>
+    </div>
+  </header>
+
+  <!-- ================= 1. HOME VIEW ================= -->
+  <main id="view-home" class="page-view active flex-1">
+    <!-- Hero with Authentic Kamphaeng Phet Laterite Background -->
+    <section class="hero-bg text-white py-24 px-4 text-center border-b border-amber-950/20">
+      <div class="max-w-4xl mx-auto">
+        <div class="inline-flex items-center gap-2 bg-stone-900/70 border border-amber-500/40 text-amber-300 text-xs px-4 py-1.5 rounded-full mb-6 backdrop-blur-sm">
+          <span>🏛️ ศิลาแลงใหญ่</span>
+          <span>•</span>
+          <span>🍌 กล้วยไข่หวาน</span>
+          <span>•</span>
+          <span>🌿 เลื่องลือมรดกโลก</span>
+        </div>
+        
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold mb-5 leading-tight tracking-tight">
+          มนต์เสน่ห์เมืองชากังราว<br>
+          <span class="text-amber-400">อารยธรรมศิลาแลงและผืนป่าตะวันตก</span>
+        </h1>
+        
+        <p class="text-stone-200 text-base sm:text-lg max-w-2xl mx-auto font-light mb-10 leading-relaxed">
+          สัมผัสความยิ่งใหญ่ของอุทยานประวัติศาสตร์มรดกโลก ตระการตาม่านน้ำตกคลองลาน ล่องสายน้ำปิง และพักผ่อนในเมืองเก่าอันสงบร่มเย็น
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-4 text-sm font-medium">
+          <a href="#places" class="bg-amber-500 hover:bg-amber-600 text-stone-900 px-6 py-3 rounded-xl shadow-md transition font-semibold">
+            สำรวจแหล่งท่องเที่ยว
+          </a>
+          <a href="#hotels" class="bg-stone-900/80 hover:bg-stone-900 text-stone-100 px-6 py-3 rounded-xl transition border border-stone-600 backdrop-blur-sm">
+            ค้นหาที่พักแนะนำ
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Provincial Highlight Features -->
+    <section class="max-w-6xl mx-auto px-4 py-16">
+      <div class="text-center mb-12">
+        <span class="text-xs uppercase tracking-wider text-amber-800 font-semibold">Discover Kamphaeng Phet</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-stone-900 mt-1">เอกลักษณ์ประจำจังหวัดกำแพงเพชร</h2>
+        <div class="w-16 h-1 bg-amber-700 mx-auto mt-3 rounded-full"></div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <a href="#places" class="group bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:border-amber-700 hover:shadow-md transition">
+          <div class="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 flex items-center justify-center text-2xl mb-4 group-hover:scale-105 transition">
+            🏛️
+          </div>
+          <h3 class="font-bold text-lg text-stone-900">แหล่งมรดกโลก</h3>
+          <p class="text-stone-500 text-xs mt-2 leading-relaxed">อุทยานประวัติศาสตร์ โบราณสถานศิลาแลง วัดช้างรอบ และวัดพระแก้ว</p>
+          <span class="inline-block mt-4 text-xs font-semibold text-amber-800">ดูสถานที่ทั้งหมด →</span>
+        </a>
+
+        <a href="#places" onclick="setTimeout(()=>filterPlaces('nature'), 100)" class="group bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:border-emerald-700 hover:shadow-md transition">
+          <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center justify-center text-2xl mb-4 group-hover:scale-105 transition">
+            🌲
+          </div>
+          <h3 class="font-bold text-lg text-stone-900">ผืนป่า & น้ำตก</h3>
+          <p class="text-stone-500 text-xs mt-2 leading-relaxed">น้ำตกคลองลานอันยิ่งใหญ่ และธรรมชาติบริสุทธิ์ของป่าต้นน้ำ</p>
+          <span class="inline-block mt-4 text-xs font-semibold text-emerald-800">ชมธรรมชาติ →</span>
+        </a>
+
+        <a href="#food" class="group bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:border-amber-700 hover:shadow-md transition">
+          <div class="w-12 h-12 rounded-xl bg-amber-100/80 border border-amber-300 text-amber-900 flex items-center justify-center text-2xl mb-4 group-hover:scale-105 transition">
+            🍌
+          </div>
+          <h3 class="font-bold text-lg text-stone-900">กล้วยไข่ & ของฝาก</h3>
+          <p class="text-stone-500 text-xs mt-2 leading-relaxed">กล้วยไข่เมืองกำแพง เฉาก๊วยชากังราว และบะหมี่ไข่โบราณ</p>
+          <span class="inline-block mt-4 text-xs font-semibold text-amber-800">ชิมของอร่อย →</span>
+        </a>
+
+        <a href="#hotels" class="group bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:border-amber-700 hover:shadow-md transition">
+          <div class="w-12 h-12 rounded-xl bg-stone-100 border border-stone-200 text-stone-800 flex items-center justify-center text-2xl mb-4 group-hover:scale-105 transition">
+            🏨
+          </div>
+          <h3 class="font-bold text-lg text-stone-900">ที่พักริมน้ำ & ในเมือง</h3>
+          <p class="text-stone-500 text-xs mt-2 leading-relaxed">โรงแรมริมแม่น้ำปิง บรรยากาศสงบ และรีสอร์ทใกล้ชิดธรรมชาติ</p>
+          <span class="inline-block mt-4 text-xs font-semibold text-amber-800">เลือกที่พัก →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= 2. ATTRACTIONS LIST VIEW ================= -->
+  <main id="view-places" class="page-view flex-1">
+    <div class="bg-gradient-to-r from-stone-900 to-amber-950 text-white py-12 px-4 border-b border-amber-900/20">
+      <div class="max-w-7xl mx-auto">
+        <span class="text-xs text-amber-400 uppercase tracking-widest font-semibold">Attractions Guide</span>
+        <h1 class="text-2xl sm:text-3xl font-bold mt-1">แหล่งท่องเที่ยวจังหวัดกำแพงเพชร</h1>
+        <p class="text-stone-300 text-sm mt-1">โบราณสถานศิลาแลง ป่าต้นน้ำ และสถานที่สำคัญประจำจังหวัด</p>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <!-- Filter Tabs -->
+      <div class="flex flex-wrap gap-2 text-sm mb-8">
+        <button onclick="filterPlaces('all')" class="p-filter active bg-amber-800 text-white px-4 py-1.5 rounded-full transition shadow-sm">ทั้งหมด</button>
+        <button onclick="filterPlaces('history')" class="p-filter bg-stone-200 text-stone-700 hover:bg-stone-300 px-4 py-1.5 rounded-full transition">ประวัติศาสตร์ศิลาแลง</button>
+        <button onclick="filterPlaces('nature')" class="p-filter bg-stone-200 text-stone-700 hover:bg-stone-300 px-4 py-1.5 rounded-full transition">อุทยาน & ธรรมชาติ</button>
+        <button onclick="filterPlaces('chill')" class="p-filter bg-stone-200 text-stone-700 hover:bg-stone-300 px-4 py-1.5 rounded-full transition">วิถีเมือง & ศักดิ์สิทธิ์</button>
+      </div>
+
+      <!-- Cards Grid -->
+      <div id="placesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </main>
+
+  <!-- ================= 3. PLACE DETAIL VIEW ================= -->
+  <main id="view-place-detail" class="page-view flex-1">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <a href="#places" class="inline-flex items-center text-sm text-stone-600 hover:text-amber-800 font-medium mb-6 transition">
+        ← กลับไปยังหน้ารวมสถานที่ท่องเที่ยว
+      </a>
+
+      <div class="bg-white rounded-3xl border border-stone-200 overflow-hidden shadow-sm">
+        <div class="relative h-72 sm:h-96 w-full bg-stone-200">
+          <img id="detailPlaceImg" src="" alt="" class="w-full h-full object-cover">
+          <span id="detailPlaceBadge" class="absolute top-4 left-4 bg-stone-900/85 backdrop-blur-md text-amber-300 text-xs px-3.5 py-1.5 rounded-full border border-amber-500/30"></span>
+        </div>
+
+        <div class="p-6 sm:p-10">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-100 pb-6 mb-6">
+            <div>
+              <h1 id="detailPlaceTitle" class="text-2xl sm:text-4xl font-bold text-stone-900"></h1>
+              <p id="detailPlaceDistrict" class="text-stone-500 text-sm mt-1"></p>
+            </div>
+            <div class="flex items-center gap-1.5 bg-amber-50 px-3.5 py-1.5 rounded-xl border border-amber-200 self-start sm:self-auto">
+              <span class="text-amber-500 font-bold text-sm">★</span>
+              <span id="detailPlaceRating" class="text-sm font-semibold text-stone-800"></span>
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <h2 class="text-lg font-bold text-stone-900 mb-3">รายละเอียดและประวัติความเป็นมา</h2>
+            <p id="detailPlaceDesc" class="text-stone-600 text-base leading-relaxed"></p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            <div class="bg-[#FAF8F5] p-4 rounded-xl border border-stone-200">
+              <span class="text-xs text-stone-400 block font-medium">🕒 เวลาทำการ</span>
+              <span id="detailPlaceHours" class="text-sm font-semibold text-stone-800 mt-1 block"></span>
+            </div>
+            <div class="bg-[#FAF8F5] p-4 rounded-xl border border-stone-200">
+              <span class="text-xs text-stone-400 block font-medium">🎟️ อัตราค่าเข้าชม</span>
+              <span id="detailPlaceFee" class="text-sm font-semibold text-stone-800 mt-1 block"></span>
+            </div>
+            <div class="bg-[#FAF8F5] p-4 rounded-xl border border-stone-200">
+              <span class="text-xs text-stone-400 block font-medium">🌤️ ช่วงเวลาแนะนำ</span>
+              <span id="detailPlaceBestTime" class="text-sm font-semibold text-stone-800 mt-1 block"></span>
+            </div>
+          </div>
+
+          <!-- Location & Google Maps -->
+          <div class="border-t border-stone-200 pt-8">
+            <h2 class="text-lg font-bold text-stone-900 mb-2">ตำแหน่งที่ตั้งและการเดินทาง</h2>
+            <p id="detailPlaceAddress" class="text-stone-600 text-sm mb-4"></p>
+            
+            <div class="bg-amber-50/70 border border-amber-200 p-5 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div>
+                <span class="text-xs font-semibold text-amber-900 block">พิกัดแผนที่ (GPS Coordinates)</span>
+                <span id="detailPlaceCoords" class="text-xs text-stone-600 mt-0.5 block font-mono"></span>
+              </div>
+              <a id="detailPlaceMapBtn" href="#" target="_blank" rel="noopener noreferrer" class="bg-amber-800 hover:bg-amber-900 text-white text-sm font-medium px-5 py-2.5 rounded-xl shadow-sm transition inline-flex items-center gap-2">
+                <span>📍 นำทางด้วย Google Maps</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= 4. HOTELS LIST VIEW ================= -->
+  <main id="view-hotels" class="page-view flex-1">
+    <div class="bg-gradient-to-r from-stone-900 to-amber-950 text-white py-12 px-4 border-b border-amber-900/20">
+      <div class="max-w-7xl mx-auto">
+        <span class="text-xs text-amber-400 uppercase tracking-widest font-semibold">Accommodations</span>
+        <h1 class="text-2xl sm:text-3xl font-bold mt-1">ที่พักแนะนำในกำแพงเพชร</h1>
+        <p class="text-stone-300 text-sm mt-1">ที่พักริมแม่น้ำปิง ใจกลางเมืองชากังราว และรีสอร์ทใกล้ผืนป่าคลองลาน</p>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div id="hotelsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+    </div>
+  </main>
+
+  <!-- ================= 5. HOTEL DETAIL VIEW ================= -->
+  <main id="view-hotel-detail" class="page-view flex-1">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <a href="#hotels" class="inline-flex items-center text-sm text-stone-600 hover:text-amber-800 font-medium mb-6 transition">
+        ← กลับไปยังหน้ารวมที่พัก
+      </a>
+
+      <div class="bg-white rounded-3xl border border-stone-200 overflow-hidden shadow-sm">
+        <div class="relative h-72 sm:h-96 w-full bg-stone-200">
+          <img id="detailHotelImg" src="" alt="" class="w-full h-full object-cover">
+          <span id="detailHotelBadge" class="absolute top-4 left-4 bg-amber-900/85 backdrop-blur-md text-amber-200 text-xs px-3.5 py-1.5 rounded-full border border-amber-600/30"></span>
+        </div>
+
+        <div class="p-6 sm:p-10">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stone-100 pb-6 mb-6">
+            <div>
+              <h1 id="detailHotelTitle" class="text-2xl sm:text-4xl font-bold text-stone-900"></h1>
+              <p id="detailHotelLocation" class="text-stone-500 text-sm mt-1"></p>
+            </div>
+            <div>
+              <span class="text-xs text-stone-400 block">ราคาเริ่มต้น</span>
+              <span id="detailHotelPrice" class="text-2xl font-bold text-amber-800"></span>
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <h2 class="text-lg font-bold text-stone-900 mb-3">เกี่ยวกับที่พัก</h2>
+            <p id="detailHotelDesc" class="text-stone-600 text-base leading-relaxed"></p>
+          </div>
+
+          <div class="mb-8">
+            <h2 class="text-lg font-bold text-stone-900 mb-3">สิ่งอำนวยความสะดวก</h2>
+            <div id="detailHotelAmenities" class="flex flex-wrap gap-2"></div>
+          </div>
+
+          <div class="border-t border-stone-200 pt-8">
+            <h2 class="text-lg font-bold text-stone-900 mb-2">ตำแหน่งที่พักและการเดินทาง</h2>
+            <p id="detailHotelAddress" class="text-stone-600 text-sm mb-4"></p>
+            <div class="bg-amber-50/70 border border-amber-200 p-5 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div>
+                <span class="text-xs font-semibold text-amber-900 block">พิกัด GPS</span>
+                <span id="detailHotelCoords" class="text-xs text-stone-600 mt-0.5 block font-mono"></span>
+              </div>
+              <a id="detailHotelMapBtn" href="#" target="_blank" rel="noopener noreferrer" class="bg-amber-800 hover:bg-amber-900 text-white text-sm font-medium px-5 py-2.5 rounded-xl shadow-sm transition inline-flex items-center gap-2">
+                <span>📍 ดูตำแหน่งบน Google Maps</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= 6. FOOD & SOUVENIRS ================= -->
+  <main id="view-food" class="page-view flex-1">
+    <div class="bg-gradient-to-r from-stone-900 to-amber-950 text-white py-12 px-4 border-b border-amber-900/20">
+      <div class="max-w-7xl mx-auto">
+        <span class="text-xs text-amber-400 uppercase tracking-widest font-semibold">Local Flavors & Crafts</span>
+        <h1 class="text-2xl sm:text-3xl font-bold mt-1">ของดี & ของฝากเมืองกำแพงเพชร</h1>
+        <p class="text-stone-300 text-sm mt-1">เอกลักษณ์รสชาติและของฝากที่ต้องแวะซื้อเมื่อมาเยือน</p>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Banana_Festival_Kampheang_Phet.jpg" alt="กล้วยไข่เมืองกำแพง" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <span class="text-xs font-semibold text-amber-800 uppercase">ผลไม้ GI ประจำจังหวัด</span>
+            <h3 class="text-lg font-bold text-stone-900 mt-1 mb-2">กล้วยไข่เมืองกำแพงเพชร</h3>
+            <p class="text-stone-600 text-sm leading-relaxed">
+              ผลไม้ขึ้นชื่อที่มีเนื้อละเอียด หวานหอม เปลือกบาง ทานสดคู่กับกระยาสารทในเทศกาลสารทไทย หรือแปรรูปเป็นกล้วยกวน กล้วยอบเนย และกล้วยฉาบ
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
+          <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80" alt="เฉาก๊วยชากังราว" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <span class="text-xs font-semibold text-amber-800 uppercase">ของหวานระดับตำนาน</span>
+            <h3 class="text-lg font-bold text-stone-900 mt-1 mb-2">เฉาก๊วยชากังราว</h3>
+            <p class="text-stone-600 text-sm leading-relaxed">
+              ของหวานดับร้อนชื่อดังต้นตำรับจากกำแพงเพชร เนื้อเฉาก๊วยเหนียวนุ่มหนึบ เคี่ยวจากหญ้าเฉาก๊วยแท้ ทานคู่น้ำเชื่อมคาราเมลและน้ำแข็งเย็นชื่นใจ
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
+          <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80" alt="บะหมี่ชากังราว" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <span class="text-xs font-semibold text-amber-800 uppercase">อาหารพื้นถิ่น</span>
+            <h3 class="text-lg font-bold text-stone-900 mt-1 mb-2">บะหมี่ชากังราวสูตรโบราณ</h3>
+            <p class="text-stone-600 text-sm leading-relaxed">
+              บะหมี่ไข่เส้นแบนทำสดสูตรโบราณ คลุกเคล้าเครื่องปรุงเข้มข้น หมูแดงนุ่ม หมูสับ กากหมูกระเทียมเจียวหอมกรุ่น และถั่วฝักยาวซอย
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= 7. REVIEWS VIEW ================= -->
+  <main id="view-reviews" class="page-view flex-1">
+    <div class="bg-gradient-to-r from-stone-900 to-amber-950 text-white py-12 px-4 border-b border-amber-900/20">
+      <div class="max-w-7xl mx-auto">
+        <span class="text-xs text-amber-400 uppercase tracking-widest font-semibold">Traveler Community</span>
+        <h1 class="text-2xl sm:text-3xl font-bold mt-1">รีวิวและความประทับใจ</h1>
+        <p class="text-stone-300 text-sm mt-1">แบ่งปันประสบการณ์ตรงจากนักเดินทางที่มาเยือนกำแพงเพชร</p>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <!-- Review Form -->
+        <div class="lg:col-span-5">
+          <div class="bg-white p-6 sm:p-7 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="text-lg font-bold text-stone-900 mb-1">เขียนรีวิวสถานที่</h3>
+            <p class="text-stone-500 text-xs mb-5">ข้อมูลรีวิวจะถูกบันทึกและแสดงผลทันที</p>
+
+            <form id="reviewForm" onsubmit="handleReviewSubmit(event)" class="space-y-4 text-sm">
+              <div>
+                <label class="block text-xs font-medium text-stone-700 mb-1">ชื่อผู้รีวิว *</label>
+                <input type="text" id="reviewerName" required placeholder="เช่น อานาวิล นักเดินทาง" class="w-full px-3 py-2 rounded-lg border border-stone-300 focus:outline-none focus:ring-2 focus:ring-amber-700">
+              </div>
+
+              <div>
+                <label class="block text-xs font-medium text-stone-700 mb-1">สถานที่ที่ต้องการรีวิว *</label>
+                <select id="reviewPlace" required class="w-full px-3 py-2 rounded-lg border border-stone-300 focus:outline-none focus:ring-2 focus:ring-amber-700 bg-white">
+                  <option value="วัดช้างรอบ (อุทยานประวัติศาสตร์)">วัดช้างรอบ (อุทยานประวัติศาสตร์)</option>
+                  <option value="อุทยานแห่งชาติคลองลาน">อุทยานแห่งชาติคลองลาน</option>
+                  <option value="วัดพระแก้ว กำแพงเพชร">วัดพระแก้ว กำแพงเพชร</option>
+                  <option value="วัดพระสี่อิริยาบถ">วัดพระสี่อิริยาบถ</option>
+                  <option value="ศาลหลักเมืองกำแพงเพชร">ศาลหลักเมืองกำแพงเพชร</option>
+                  <option value="วัดพระนอน กำแพงเพชร">วัดพระนอน กำแพงเพชร</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-medium text-stone-700 mb-1">คะแนนความพึงพอใจ</label>
+                <div class="flex items-center gap-1" id="starRating">
+                  <button type="button" onclick="setRating(1)" class="star-btn text-2xl text-amber-500">★</button>
+                  <button type="button" onclick="setRating(2)" class="star-btn text-2xl text-amber-500">★</button>
+                  <button type="button" onclick="setRating(3)" class="star-btn text-2xl text-amber-500">★</button>
+                  <button type="button" onclick="setRating(4)" class="star-btn text-2xl text-amber-500">★</button>
+                  <button type="button" onclick="setRating(5)" class="star-btn text-2xl text-amber-500">★</button>
+                  <span id="ratingValueText" class="text-xs text-stone-500 font-medium ml-2">5/5 ดาว</span>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-medium text-stone-700 mb-1">ข้อความรีวิว *</label>
+                <textarea id="reviewText" rows="3" required placeholder="บอกเล่าความสวยงาม บรรยากาศ หรือข้อแนะนำสำหรับเพื่อนๆ..." class="w-full px-3 py-2 rounded-lg border border-stone-300 focus:outline-none focus:ring-2 focus:ring-amber-700"></textarea>
+              </div>
+
+              <button type="submit" class="w-full bg-amber-800 hover:bg-amber-900 text-white font-medium py-2.5 rounded-lg text-sm transition shadow-sm">
+                ส่งความคิดเห็น
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Reviews List -->
+        <div class="lg:col-span-7">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-stone-900">รีวิวทั้งหมด</h3>
+            <span id="reviewCountBadge" class="text-xs bg-amber-100 text-amber-900 font-semibold px-2.5 py-1 rounded-full border border-amber-200">3 รีวิว</span>
+          </div>
+
+          <div id="reviewsList" class="space-y-4">
+            <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
+              <div class="flex justify-between items-center mb-1">
+                <span class="font-bold text-stone-800 text-sm">กานต์พิชชา</span>
+                <span class="text-amber-500 text-sm">★★★★★</span>
+              </div>
+              <span class="text-xs text-amber-800 block mb-2 font-medium">วัดช้างรอบ (อุทยานประวัติศาสตร์)</span>
+              <p class="text-stone-600 text-sm">ช้างปูนปั้นศิลาแลงรอบเจดีย์มีมนต์ขลังมากครับ โบราณสถานแวดล้อมด้วยผืนป่าเงียบสงบ แนะนำให้มาปั่นจักรยานชมช่วงเช้า</p>
+              <span class="text-[11px] text-stone-400 mt-2 block">18 กันยายน 2026</span>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
+              <div class="flex justify-between items-center mb-1">
+                <span class="font-bold text-stone-800 text-sm">วิเชียร ส.</span>
+                <span class="text-amber-500 text-sm">★★★★★</span>
+              </div>
+              <span class="text-xs text-emerald-800 block mb-2 font-medium">อุทยานแห่งชาติคลองลาน</span>
+              <p class="text-stone-600 text-sm">ม่านน้ำตกคลองลานยิ่งใหญ่ตระการตามาก เดินจากที่จอดรถเพียงนิดเดียวก็ได้ยินเสียงน้ำตกและสัมผัสละอองน้ำเย็นสดชื่น</p>
+              <span class="text-[11px] text-stone-400 mt-2 block">10 กันยายน 2026</span>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
+              <div class="flex justify-between items-center mb-1">
+                <span class="font-bold text-stone-800 text-sm">พัชรินทร์</span>
+                <span class="text-amber-500 text-sm">★★★★☆</span>
+              </div>
+              <span class="text-xs text-amber-800 block mb-2 font-medium">วัดพระแก้ว กำแพงเพชร</span>
+              <p class="text-stone-600 text-sm">พระพุทธรูปศิลาแลงและเจดีย์สิงห์ล้อมงดงามมาก บริเวณกว้างขวาง ร่มรื่น และมีป้ายข้อมูลประวัติศาสตร์ให้อ่านอย่างละเอียด</p>
+              <span class="text-[11px] text-stone-400 mt-2 block">2 กันยายน 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-stone-900 text-stone-400 py-10 px-4 text-center text-xs border-t border-amber-950">
+    <div class="max-w-4xl mx-auto space-y-3">
+      <div class="flex justify-center items-center gap-2 text-amber-400 text-sm font-semibold">
+        <span>🏛️ กำแพงเพชร เมืองมรดกโลกชากังราว</span>
+      </div>
+      <p class="text-stone-400 max-w-xl mx-auto">
+        "กรุพระเครื่อง เมืองคนแกร่ง พระแสงฯ ล้ำค่า ศิลาแลงใหญ่ กล้วยไข่หวาน น้ำมันลานกระบือ เลื่องลือมรดกโลก"
+      </p>
+      <p class="text-stone-600 pt-2">© 2026 ข้อมูลท่องเที่ยวและที่พักจังหวัดกำแพงเพชร</p>
+    </div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    // Places Data (ภาพถ่ายจริงของกำแพงเพชร 100%)
+    const placesData = [
+      {
+        id: "1",
+        name: "วัดช้างรอบ (อุทยานประวัติศาสตร์)",
+        category: "history",
+        categoryLabel: "มรดกโลก UNESCO",
+        district: "อ.เมืองกำแพงเพชร",
+        rating: "4.9 (540 รีวิว)",
+        img: "https://commons.wikimedia.org/wiki/Special:FilePath/Wat_ChangRop.jpg",
+        shortDesc: "โบราณสถานขนาดใหญ่บนเนินเขาสูง โดดเด่นด้วยฐานเจดีย์ประดับประติมากรรมช้างปูนปั้นศิลาแลง 68 เชือก",
+        fullDesc: "วัดช้างรอบ เป็นโบราณสถานสำคัญในเขตอรัญญิกของอุทยานประวัติศาสตร์กำแพงเพชร โดดเด่นด้วยเจดีย์ประธานทรงระฆังคว่ำศิลปะสุโขทัย ฐานสี่เหลี่ยมสร้างด้วยศิลาแลง ประดับด้วยรูปช้างปูนปั้นโผล่ครึ่งตัวรอบฐานอย่างวิจิตรบรรจง แวดล้อมด้วยป่าธรรมชาติร่มรื่น",
+        hours: "08:30 - 16:30 น. (ทุกวัน)",
+        fee: "ชาวไทย 20 บาท / ชาวต่างชาติ 100 บาท",
+        bestTime: "ช่วงเช้า 08:30 - 10:30 น.",
+        address: "ตำบลหนองปลิง อำเภอเมืองกำแพงเพชร จังหวัดกำแพงเพชร 62000",
+        coords: "16.4950° N, 99.5170° E",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=วัดช้างรอบ+กำแพงเพชร"
+      },
+      {
+        id: "2",
+        name: "อุทยานแห่งชาติคลองลาน",
+        category: "nature",
+        categoryLabel: "อุทยานแห่งชาติ",
+        district: "อ.คลองลาน",
+        rating: "4.8 (430 รีวิว)",
+        img: "https://commons.wikimedia.org/wiki/Special:FilePath/Klonglan_waterfall_03.jpg",
+        shortDesc: "ม่านน้ำตกขนาดใหญ่สูงกว่า 100 เมตร สายน้ำสีขาวแผ่กว้างอลังการ ท่ามกลางผืนป่าที่อุดมสมบูรณ์",
+        fullDesc: "น้ำตกคลองลาน เกิดจากเทือกเขาขุนคลองลาน ไหลลงสู่หน้าผาสูงชันกว่า 100 เมตร กว้างประมาณ 40 เมตร เกิดเป็นม่านละอองน้ำเย็นสดชื่นขนาดใหญ่ ถือเป็นหนึ่งในน้ำตกที่สวยและสมบูรณ์ที่สุดในภาคเหนือตอนล่าง ทางเดินเข้าชมสะดวกสบาย",
+        hours: "08:00 - 16:30 น. (ทุกวัน)",
+        fee: "ผู้ใหญ่ 40 บาท, เด็ก 20 บาท",
+        bestTime: "กันยายน - กุมภาพันธ์",
+        address: "ตำบลคลองลานพัฒนา อำเภอคลองลาน จังหวัดกำแพงเพชร 62180",
+        coords: "16.1308° N, 99.2789° E",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=อุทยานแห่งชาติคลองลาน"
+      },
+      {
+        id: "3",
+        name: "วัดพระแก้ว กำแพงเพชร",
+        category: "history",
+        categoryLabel: "มรดกโลก UNESCO",
+        district: "อ.เมืองกำแพงเพชร",
+        rating: "4.9 (480 รีวิว)",
+        img: "https://commons.wikimedia.org/wiki/Special:FilePath/Wat_Phra_Keaw_in_Kamphaeng_Phet.jpg",
+        shortDesc: "พระอารามหลวงขนาดใหญ่ใจกลางเมืองโบราณ มีเจดีย์สิงห์ล้อมและพระพุทธรูปปางไสยาสน์ศิลาแลง",
+        fullDesc: "วัดพระแก้ว เป็นวัดสำคัญประจำเมืองชากังราว ใช้ประกอบพระราชพิธีสำคัญในอดีต ปัจจุบันยังคงหลงเหลือฐานอุโบสถ เจดีย์ประธานทรงดอกบัวตูม และพระพุทธรูปศิลาแลงขนาดใหญ่ เป็นจุดศูนย์กลางของอุทยานประวัติศาสตร์",
+        hours: "08:30 - 16:30 น. (ทุกวัน)",
+        fee: "ชาวไทย 20 บาท / ชาวต่างชาติ 100 บาท",
+        bestTime: "ตลอดทั้งปี",
+        address: "ตำบลในเมือง อำเภอเมืองกำแพงเพชร จังหวัดกำแพงเพชร 62000",
+        coords: "16.4886° N, 99.5194° E",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=วัดพระแก้ว+กำแพงเพชร"
+      },
+      {
+        id: "4",
+        name: "วัดพระสี่อิริยาบถ",
+        category: "history",
+        categoryLabel: "มรดกโลก UNESCO",
+        district: "อ.เมืองกำแพงเพชร",
+        rating: "4.8 (310 รีวิว)",
+        img: "https://commons.wikimedia.org/wiki/Special:FilePath/Standing_Buddha_-_Wat_Phra_Si_Iriyabot.jpg",
+        shortDesc: "มณฑปจัตุรมุขโบราณที่เคยประดิษฐานพระพุทธรูป 4 อิริยาบถ ปัจจุบันเหลือองค์ปางยืนที่สมบูรณ์ที่สุด",
+        fullDesc: "เอกลักษณ์สำคัญคือมณฑปศิลาแลงขนาดใหญ่สี่ด้าน ซึ่งแต่เดิมประดิษฐานพระพุทธรูปทั้ง 4 อิริยาบถ คือ นั่ง นอน ยืน และเดิน โดยพระพุทธรูปปางยืนด้านทิศใต้ยังคงความงดงามตามแบบฉบับพุทธศิลป์สุโขทัยอย่างเด่นชัด",
+        hours: "08:30 - 16:30 น. (ทุกวัน)",
+        fee: "ชาวไทย 20 บาท / ชาวต่างชาติ 100 บาท",
+        bestTime: "ช่วงเช้า 08:30 - 11:00 น.",
+        address: "ตำบลหนองปลิง อำเภอเมืองกำแพงเพชร จังหวัดกำแพงเพชร 62000",
+        coords: "16.4940° N, 99.5175° E",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=วัดพระสี่อิริยาบถ+กำแพงเพชร"
+      },
+      {
+        id: "5",
+        name: "ศาลหลักเมืองกำแพงเพชร",
+        category: "chill",
+        categoryLabel: "สถานที่ศักดิ์สิทธิ์คู่เมือง",
+        district: "อ.เมืองกำแพงเพชร",
+        rating: "4.7 (780 รีวิว)",
+        img: "https://commons.wikimedia.org/wiki/Special:FilePath/Kamphaeng_Phet_City_Pillar_Shrine.jpg",
+        shortDesc: "ศูนย์รวมจิตใจของชาวกำแพงเพชร สถาปัตยกรรมไทยประยุกต์ศิลาแลง สันนิษฐานว่าสร้างขึ้นแต่ครั้งพญาลิไท",
+        fullDesc: "ศาลหลักเมืองกำแพงเพชร เสาหลักเมืองทำจากไม้สักทองยอดบัวตูม ตั้งอยู่หน้าโรงเรียนเรืองวิทย์พิทยาคม ชาวเมืองและนักท่องเที่ยวนิยมมากราบไหว้ขอพรเพื่อความเป็นสิริมงคลและความเจริญรุ่งเรือง",
+        hours: "07:00 - 18:00 น. (ทุกวัน)",
+        fee: "เข้าชมฟรี",
+        bestTime: "ตลอดทั้งวัน",
+        address: "ทางหลวงแผ่นดินหมายเลข 101 ตำบลในเมือง อำเภอเมืองกำแพงเพชร 62000",
+        coords: "16.4862° N, 99.5218° E",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=ศาลหลักเมืองกำแพงเพชร"
+      },
+      {
+        id: "6",
+        name: "วัดพระนอน กำแพงเพชร",
+        category: "history",
+        categoryLabel: "มรดกโลก UNESCO",
+        district: "อ.เมืองกำแพงเพชร",
+        rating: "4.7 (250 รีวิว)",
+        img: "https://commons.wikimedia.org/wiki/Special:FilePath/Wat_Phra_Non_(Kamphaeng_Phet)_01.JPG",
+        shortDesc: "ชมเสาศิลาแลงแท่งเดี่ยวขนาดใหญ่ที่สุดในประเทศไทย ด้านหน้าอุโบสถโบราณในเขตอรัญญิก",
+        fullDesc: "วัดพระนอน มีจุดเด่นคือเสาศิลาแลงทรงแปดเหลี่ยมและทรงกลมที่ตัดจากศิลาแลงแท่งเดียว สูงกว่า 6.4 เมตร ซึ่งถือเป็นงานประติมากรรมหินศิลาแลงชิ้นเอกของช่างโบราณเมืองกำแพงเพชร",
+        hours: "08:30 - 16:30 น. (ทุกวัน)",
+        fee: "ชาวไทย 20 บาท / ชาวต่างชาติ 100 บาท",
+        bestTime: "ช่วงเช้าหรือบ่ายคล้อย",
+        address: "ตำบลหนองปลิง อำเภอเมืองกำแพงเพชร จังหวัดกำแพงเพชร 62000",
+        coords: "16.4925° N, 99.5165° E",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=วัดพระนอน+กำแพงเพชร"
+      }
+    ];
+
+    // Hotels Data
+    const hotelsData = [
+      {
+        id: "h1",
+        name: "White Wall Riverfront Hotel",
+        badge: "วิวริมแม่น้ำปิง",
+        district: "อ.เมืองกำแพงเพชร",
+        price: "฿1,400 / คืน",
+        img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80",
+        desc: "โรงแรมสไตล์มินิมอลโมเดิร์นสีขาวสะอาดตา ตั้งอยู่ติดริมแม่น้ำปิง บรรยากาศเงียบสงบ เหมาะสำหรับคู่รักหรือครอบครัวที่ต้องการพักผ่อน สามารถชมวิวคุ้งน้ำปิงจากระเบียงห้องพักได้อย่างเต็มตา",
+        amenities: ["สระว่ายน้ำกลางแจ้ง", "วิวแม่น้ำปิง", "Wi-Fi ความเร็วสูงฟรี", "ที่จอดรถสะดวกสบาย", "คาเฟ่ในโรงแรม", "เครื่องปรับอากาศ"],
+        address: "ถนนเทศา 2 ตำบลในเมือง อำเภอเมืองกำแพงเพชร จังหวัดกำแพงเพชร 62000",
+        coords: "16.4750° N, 99.5310° E",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=White+Wall+Riverfront+Hotel+กำแพงเพชร"
+      },
+      {
+        id: "h2",
+        name: "Navarat Heritage Hotel",
+        badge: "ใจกลางเมืองชากังราว",
+        district: "อ.เมืองกำแพงเพชร",
+        price: "฿950 / คืน",
+        img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1000&q=80",
+        desc: "โรงแรมมาตรฐานชั้นนำใจกลางเมืองกำแพงเพชร เดินทางสะดวก ใกล้ตลาดศูนย์การค้าและร้านอาหารชื่อดัง มีห้องพักกว้างขวาง สิ่งอำนวยความสะดวกครบครัน และการบริการที่อบอุ่น",
+        amenities: ["ห้องอาหารเช้าบุฟเฟต์", "ฟิตเนสเซ็นเตอร์", "ห้องประชุมสัมมนา", "Wi-Fi ฟรี", "ที่จอดรถขนาดใหญ่", "แผนกต้อนรับ 24 ชม."],
+        address: "เลขที่ 2 ถ.เทศา 1 ต.ในเมือง อ.เมืองกำแพงเพชร จ.กำแพงเพชร 62000",
+        coords: "16.4835° N, 99.5262° E",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=โรงแรม+นวรัตน์+เฮอริเทจ+กำแพงเพชร"
+      },
+      {
+        id: "h3",
+        name: "คลองลาน การ์เดน รีสอร์ท",
+        badge: "ใกล้ธรรมชาติคลองลาน",
+        district: "อ.คลองลาน",
+        price: "฿800 / คืน",
+        img: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1000&q=80",
+        desc: "รีสอร์ทบ้านสวนบรรยากาศอบอุ่น ตั้งอยู่ใกล้อุทยานแห่งชาติคลองลานเพียง 10 นาที ล้อมรอบด้วยขุนเขาและแมกไม้นานาพันธุ์ อากาศบริสุทธิ์ เหมาะสำหรับการพักค้างแรมก่อนขึ้นไปเที่ยวชมน้ำตกหรือช่องเย็น",
+        amenities: ["บ้านพักเป็นหลังส่วนตัว", "ลานกิจกรรมและเตาปิ้งย่าง", "ที่จอดรถส่วนตัวข้างห้อง", "Wi-Fi ฟรี", "เครื่องทำน้ำอุ่น"],
+        address: "ตำบลคลองลานพัฒนา อำเภอคลองลาน จังหวัดกำแพงเพชร 62180",
+        coords: "16.1420° N, 99.3015° E",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=คลองลาน+การ์เดน+รีสอร์ท+กำแพงเพชร"
+      }
+    ];
+
+    // Render Places
+    function renderPlacesGrid() {
+      const grid = document.getElementById('placesGrid');
+      grid.innerHTML = placesData.map(p => `
+        <a href="#place/${p.id}" class="place-card group bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm hover:border-amber-700 hover:shadow-md transition flex flex-col justify-between" data-category="${p.category}">
+          <div>
+            <div class="h-48 w-full overflow-hidden relative bg-stone-200">
+              <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+              <span class="absolute top-3 left-3 bg-stone-900/85 backdrop-blur-sm text-amber-300 text-[11px] px-2.5 py-1 rounded-md border border-amber-500/20">${p.categoryLabel}</span>
+            </div>
+            <div class="p-5">
+              <h3 class="font-bold text-lg text-stone-900 group-hover:text-amber-800 transition">${p.name}</h3>
+              <p class="text-stone-600 text-xs mt-2 leading-relaxed">${p.shortDesc}</p>
+            </div>
+          </div>
+          <div class="p-5 pt-0">
+            <div class="pt-3 border-t border-stone-100 flex items-center justify-between text-xs text-stone-500">
+              <span>📍 ${p.district}</span>
+              <span class="text-amber-800 font-semibold group-hover:underline">ดูรายละเอียดและแผนที่ →</span>
+            </div>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    // Render Hotels
+    function renderHotelsGrid() {
+      const grid = document.getElementById('hotelsGrid');
+      grid.innerHTML = hotelsData.map(h => `
+        <a href="#hotel/${h.id}" class="group bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm hover:border-amber-700 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="h-48 w-full overflow-hidden relative bg-stone-200">
+              <img src="${h.img}" alt="${h.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+              <span class="absolute top-3 right-3 bg-white/95 text-stone-900 text-xs font-semibold px-2.5 py-1 rounded-full shadow">${h.badge}</span>
+            </div>
+            <div class="p-5">
+              <h3 class="font-bold text-lg text-stone-900 group-hover:text-amber-800 transition">${h.name}</h3>
+              <p class="text-stone-500 text-xs mt-1">📍 ${h.district}</p>
+              <div class="mt-3 flex flex-wrap gap-1.5 text-xs text-stone-600">
+                ${h.amenities.slice(0, 3).map(a => `<span class="bg-[#FAF8F5] border border-stone-200 px-2 py-0.5 rounded">${a}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+          <div class="p-5 pt-0">
+            <div class="pt-3 border-t border-stone-100 flex items-center justify-between">
+              <div>
+                <span class="text-xs text-stone-400">เริ่มต้น</span>
+                <span class="text-base font-bold text-amber-800 block leading-tight">${h.price}</span>
+              </div>
+              <span class="text-xs font-medium text-amber-800 group-hover:underline">ดูแผนที่ & รายละเอียด →</span>
+            </div>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    // Client-Side Router
+    function router() {
+      const hash = window.location.hash.replace('#', '') || 'home';
+      document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active'));
+
+      // Detail: Place
+      if (hash.startsWith('place/')) {
+        const placeId = hash.split('/')[1];
+        const place = placesData.find(p => p.id === placeId);
+        if (place) {
+          document.getElementById('detailPlaceImg').src = place.img;
+          document.getElementById('detailPlaceBadge').innerText = place.categoryLabel;
+          document.getElementById('detailPlaceTitle').innerText = place.name;
+          document.getElementById('detailPlaceDistrict').innerText = `📍 ${place.district}`;
+          document.getElementById('detailPlaceRating').innerText = place.rating;
+          document.getElementById('detailPlaceDesc').innerText = place.fullDesc;
+          document.getElementById('detailPlaceHours').innerText = place.hours;
+          document.getElementById('detailPlaceFee').innerText = place.fee;
+          document.getElementById('detailPlaceBestTime').innerText = place.bestTime;
+          document.getElementById('detailPlaceAddress').innerText = `ที่อยู่: ${place.address}`;
+          document.getElementById('detailPlaceCoords').innerText = place.coords;
+          document.getElementById('detailPlaceMapBtn').href = place.mapUrl;
+
+          document.getElementById('view-place-detail').classList.add('active');
+          setActiveNav('places');
+          window.scrollTo(0, 0);
+          return;
+        }
+      }
+
+      // Detail: Hotel
+      if (hash.startsWith('hotel/')) {
+        const hotelId = hash.split('/')[1];
+        const hotel = hotelsData.find(h => h.id === hotelId);
+        if (hotel) {
+          document.getElementById('detailHotelImg').src = hotel.img;
+          document.getElementById('detailHotelBadge').innerText = hotel.badge;
+          document.getElementById('detailHotelTitle').innerText = hotel.name;
+          document.getElementById('detailHotelLocation').innerText = `📍 ${hotel.district}`;
+          document.getElementById('detailHotelPrice').innerText = hotel.price;
+          document.getElementById('detailHotelDesc').innerText = hotel.desc;
+          document.getElementById('detailHotelAddress').innerText = `ที่อยู่: ${hotel.address}`;
+          document.getElementById('detailHotelCoords').innerText = hotel.coords;
+          document.getElementById('detailHotelMapBtn').href = hotel.mapUrl;
+
+          const amenitiesBox = document.getElementById('detailHotelAmenities');
+          amenitiesBox.innerHTML = hotel.amenities.map(a => `
+            <span class="bg-amber-50 text-amber-900 text-xs font-medium px-3 py-1.5 rounded-lg border border-amber-200">✓ ${a}</span>
+          `).join('');
+
+          document.getElementById('view-hotel-detail').classList.add('active');
+          setActiveNav('hotels');
+          window.scrollTo(0, 0);
+          return;
+        }
+      }
+
+      // Main Views
+      const validPages = ['home', 'places', 'hotels', 'food', 'reviews'];
+      const targetPage = validPages.includes(hash) ? hash : 'home';
+      const activeView = document.getElementById(`view-${targetPage}`);
+      if (activeView) activeView.classList.add('active');
+      setActiveNav(targetPage);
+      window.scrollTo(0, 0);
+    }
+
+    function setActiveNav(pageKey) {
+      document.querySelectorAll('.nav-link').forEach(link => {
+        if (link.dataset.page === pageKey) {
+          link.classList.add('bg-amber-100/60', 'text-amber-900', 'font-semibold');
+          link.classList.remove('text-stone-600');
+        } else {
+          link.classList.remove('bg-amber-100/60', 'text-amber-900', 'font-semibold');
+          link.classList.add('text-stone-600');
+        }
+      });
+    }
+
+    function filterPlaces(category) {
+      const cards = document.querySelectorAll('.place-card');
+      const buttons = document.querySelectorAll('.p-filter');
+
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-amber-800', 'text-white');
+        btn.classList.add('bg-stone-200', 'text-stone-700');
+      });
+      event.currentTarget.classList.remove('bg-stone-200', 'text-stone-700');
+      event.currentTarget.classList.add('bg-amber-800', 'text-white');
+
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Star Rating
+    let selectedRating = 5;
+    function setRating(rating) {
+      selectedRating = rating;
+      const stars = document.querySelectorAll('.star-btn');
+      stars.forEach((star, idx) => {
+        if (idx < rating) {
+          star.classList.remove('text-stone-300');
+          star.classList.add('text-amber-500');
+        } else {
+          star.classList.remove('text-amber-500');
+          star.classList.add('text-stone-300');
+        }
+      });
+      document.getElementById('ratingValueText').innerText = `${rating}/5 ดาว`;
+    }
+
+    function loadReviews() {
+      const stored = localStorage.getItem('kpp_reviews');
+      if (stored) {
+        const reviews = JSON.parse(stored);
+        const container = document.getElementById('reviewsList');
+        reviews.forEach(rev => renderReviewCard(rev, container, false));
+        updateCountBadge();
+      }
+    }
+
+    function updateCountBadge() {
+      const count = document.getElementById('reviewsList').children.length;
+      document.getElementById('reviewCountBadge').innerText = `${count} รีวิว`;
+    }
+
+    function renderReviewCard(rev, container, prepend = true) {
+      const stars = '★'.repeat(rev.rating) + '☆'.repeat(5 - rev.rating);
+      const card = document.createElement('div');
+      card.className = "bg-white p-5 rounded-xl border border-stone-200 shadow-sm";
+      card.innerHTML = `
+        <div class="flex justify-between items-center mb-1">
+          <span class="font-bold text-stone-800 text-sm">${rev.name}</span>
+          <span class="text-amber-500 text-sm">${stars}</span>
+        </div>
+        <span class="text-xs text-amber-800 font-medium block mb-2">${rev.place}</span>
+        <p class="text-stone-600 text-sm">${rev.text}</p>
+        <span class="text-[11px] text-stone-400 mt-2 block">${rev.date}</span>
+      `;
+      if (prepend) container.prepend(card);
+      else container.appendChild(card);
+    }
+
+    function handleReviewSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('reviewerName').value.trim();
+      const place = document.getElementById('reviewPlace').value;
+      const text = document.getElementById('reviewText').value.trim();
+      const date = new Date().toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' });
+
+      const newReview = { name, place, rating: selectedRating, text, date };
+      const container = document.getElementById('reviewsList');
+      renderReviewCard(newReview, container, true);
+
+      const stored = localStorage.getItem('kpp_reviews');
+      const reviews = stored ? JSON.parse(stored) : [];
+      reviews.unshift(newReview);
+      localStorage.setItem('kpp_reviews', JSON.stringify(reviews));
+
+      document.getElementById('reviewForm').reset();
+      setRating(5);
+      updateCountBadge();
+      alert('บันทึกรีวิวของคุณเรียบร้อยแล้ว');
+    }
+
+    window.addEventListener('hashchange', router);
+    window.addEventListener('DOMContentLoaded', () => {
+      renderPlacesGrid();
+      renderHotelsGrid();
+      router();
+      loadReviews();
+    });
+  </script>
+</body>
+</html>
